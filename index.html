@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BERO — Natural Oral Care</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --green-dark: #2d5a27; --green-mid: #3d6b34; --green-light: #6a9960;
+    --green-pale: #e4eedf; --cream: #f7f4ef; --ink: #1a1a15; --muted: #6b6b60;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--ink); overflow-x: hidden; }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: grid; grid-template-rows: auto 1fr auto; position: relative; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; background: linear-gradient(160deg, #1e3d1a 0%, #2d5a27 45%, #3d6b34 100%); z-index: 0; }
+  .leaf { position: absolute; border-radius: 50% 10% 50% 10%; opacity: 0.07; z-index: 1; }
+  .leaf-1 { width: 300px; height: 400px; background: #fff; top: -80px; right: -60px; transform: rotate(30deg); }
+  .leaf-2 { width: 200px; height: 280px; background: #fff; bottom: 60px; left: -40px; transform: rotate(-20deg); }
+  nav { position: relative; z-index: 10; display: flex; justify-content: space-between; align-items: center; padding: 28px 40px; }
+  .logo { font-family: 'Playfair Display', serif; font-size: 22px; color: #fff; letter-spacing: 4px; font-weight: 700; }
+  .nav-tag { font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 2px; text-transform: uppercase; }
+  .hero-body { position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 24px; text-align: center; }
+  .eyebrow { display: inline-block; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.2); padding: 6px 16px; border-radius: 20px; margin-bottom: 32px; }
+  h1 { font-family: 'Playfair Display', serif; font-size: clamp(38px, 7vw, 72px); color: #fff; line-height: 1.1; max-width: 720px; margin-bottom: 24px; font-weight: 700; }
+  h1 em { font-style: italic; color: #a8d4a0; }
+  .subtitle { font-size: 16px; color: rgba(255,255,255,0.65); max-width: 440px; line-height: 1.7; margin-bottom: 48px; font-weight: 300; }
+  .form-wrap { background: rgba(255,255,255,0.08); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.15); border-radius: 16px; padding: 8px 8px 8px 20px; display: flex; gap: 8px; width: 100%; max-width: 440px; margin-bottom: 16px; }
+  .form-wrap input { flex: 1; background: transparent; border: none; outline: none; font-size: 15px; color: #fff; font-family: 'Inter', sans-serif; }
+  .form-wrap input::placeholder { color: rgba(255,255,255,0.4); }
+  .btn-primary { background: #fff; color: var(--green-dark); border: none; border-radius: 10px; padding: 12px 24px; font-size: 14px; font-weight: 600; cursor: pointer; transition: transform 0.15s; font-family: 'Inter', sans-serif; white-space: nowrap; }
+  .btn-primary:hover { transform: translateY(-1px); }
+  .form-note { font-size: 11px; color: rgba(255,255,255,0.35); letter-spacing: 0.5px; }
+  .hero-footer { position: relative; z-index: 10; display: flex; justify-content: center; gap: 40px; padding: 32px 24px; border-top: 1px solid rgba(255,255,255,0.1); }
+  .stat { text-align: center; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 28px; color: #fff; font-weight: 700; }
+  .stat-label { font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+
+  /* HOW IT WORKS */
+  .section { padding: 80px 24px; max-width: 960px; margin: 0 auto; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--ink); margin-bottom: 8px; font-weight: 700; }
+  .section-sub { font-size: 15px; color: var(--muted); margin-bottom: 56px; max-width: 500px; line-height: 1.6; }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; }
+  .step-num { font-family: 'Playfair Display', serif; font-size: 56px; font-weight: 700; color: var(--green-pale); line-height: 1; margin-bottom: 12px; }
+  .step h3 { font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+  .step p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  /* SEASONS */
+  .seasons-section { background: var(--green-dark); padding: 80px 24px; }
+  .seasons-inner { max-width: 960px; margin: 0 auto; }
+  .seasons-title { font-family: 'Playfair Display', serif; font-size: 36px; color: #fff; margin-bottom: 8px; }
+  .seasons-sub { font-size: 15px; color: rgba(255,255,255,0.5); margin-bottom: 48px; }
+  .seasons-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .season-card { border-radius: 16px; overflow: hidden; transition: transform 0.2s; }
+  .season-card:hover { transform: translateY(-4px); }
+  .season-card-top { padding: 24px 20px 16px; }
+  .s-num { font-size: 11px; letter-spacing: 2px; opacity: 0.7; margin-bottom: 8px; color: #fff; }
+  .s-name { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .s-months { font-size: 12px; opacity: 0.6; color: #fff; }
+  .season-card-bottom { background: rgba(0,0,0,0.15); padding: 14px 20px; }
+  .bonus-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+  .bonus { font-size: 13px; color: rgba(255,255,255,0.85); font-weight: 500; }
+
+  /* PRICING */
+  .pricing-section { padding: 80px 24px; }
+  .pricing-inner { max-width: 960px; margin: 0 auto; }
+  .pricing-title { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--ink); margin-bottom: 8px; }
+  .pricing-sub { font-size: 15px; color: var(--muted); margin-bottom: 48px; }
+  .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 640px; }
+  .plan { border-radius: 20px; padding: 32px; border: 1.5px solid #e0ddd6; position: relative; }
+  .plan.featured { border-color: var(--green-mid); background: var(--green-pale); }
+  .plan-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--green-mid); color: #fff; font-size: 11px; font-weight: 600; letter-spacing: 1px; padding: 4px 14px; border-radius: 20px; }
+  .plan-name { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+  .plan-price { font-family: 'Playfair Display', serif; font-size: 42px; color: var(--ink); font-weight: 700; }
+  .plan-period { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+  .plan-features { list-style: none; }
+  .plan-features li { font-size: 14px; color: var(--muted); padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.06); display: flex; gap: 8px; }
+  .plan-features li::before { content: "✓"; color: var(--green-mid); font-weight: 700; flex-shrink: 0; }
+
+  /* CTA */
+  .cta-section { background: var(--green-pale); padding: 80px 24px; text-align: center; }
+  .cta-title { font-family: 'Playfair Display', serif; font-size: 40px; color: var(--green-dark); margin-bottom: 16px; max-width: 560px; margin-left: auto; margin-right: auto; }
+  .cta-sub { font-size: 16px; color: var(--green-light); margin-bottom: 40px; }
+  .cta-form { display: flex; gap: 8px; max-width: 420px; margin: 0 auto 12px; background: #fff; border-radius: 14px; padding: 8px 8px 8px 20px; box-shadow: 0 4px 24px rgba(61,107,52,0.15); }
+  .cta-form input { flex: 1; border: none; outline: none; font-size: 15px; font-family: 'Inter', sans-serif; background: transparent; color: var(--ink); }
+  .cta-form input::placeholder { color: #aaa; }
+  .btn-green { background: var(--green-mid); color: #fff; border: none; border-radius: 10px; padding: 12px 22px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: background 0.15s; white-space: nowrap; }
+  .btn-green:hover { background: var(--green-dark); }
+  .counter { font-size: 13px; color: var(--green-light); margin-top: 8px; }
+
+  .success { display: none; }
+  .success.show { display: block; }
+  .hide { display: none !important; }
+
+  footer { padding: 32px 24px; text-align: center; border-top: 1px solid #e8e5de; }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 18px; letter-spacing: 4px; color: var(--green-mid); margin-bottom: 8px; }
+  .footer-sub { font-size: 12px; color: var(--muted); }
+
+  @media (max-width: 600px) {
+    nav { padding: 20px; }
+    .seasons-grid { grid-template-columns: 1fr 1fr; }
+    .plans { grid-template-columns: 1fr; }
+    .hero-footer { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="leaf leaf-1"></div>
+  <div class="leaf leaf-2"></div>
+  <nav>
+    <div class="logo">BERO</div>
+    <div class="nav-tag">Natural Oral Care</div>
+  </nav>
+  <div class="hero-body">
+    <div class="eyebrow">Скоро запуск в России</div>
+    <h1>Чистота <em>по&nbsp;расписанию</em></h1>
+    <p class="subtitle">Подписка на замену насадки для зубной щётки. Раз в три месяца — красивая коробочка прямо в дверь. Без напоминаний, без походов в аптеку.</p>
+    <div class="form-wrap" id="hero-form">
+      <input type="email" id="hero-email" placeholder="твой@email.ru" />
+      <button class="btn-primary" onclick="heroSubmit()">Записаться</button>
+    </div>
+    <div class="success" id="hero-success">
+      <div style="font-size:36px;margin-bottom:8px;">🌿</div>
+      <div style="color:rgba(255,255,255,0.8);font-size:15px;">Отлично! Мы напишем, как только откроем подписку.</div>
+    </div>
+    <p class="form-note">Без спама · отписаться в одно касание</p>
+  </div>
+  <div class="hero-footer">
+    <div class="stat"><div class="stat-num">3</div><div class="stat-label">месяца — смена насадки</div></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">сезонных выпуска в год</div></div>
+    <div class="stat"><div class="stat-num">0</div><div class="stat-label">напоминаний нужно</div></div>
+  </div>
+</section>
+
+<section style="background: var(--cream);">
+  <div class="section">
+    <div class="section-title">Как это работает</div>
+    <div class="section-sub">Подписка работает сама. Один раз настраиваешь — дальше просто получаешь.</div>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><h3>Выбираешь тип насадки</h3><p>Мягкая, стандарт или для чувствительных зубов. Совместима с Oral-B и Philips.</p></div>
+      <div class="step"><div class="step-num">02</div><h3>Подписка списывает сама</h3><p>Раз в месяц — небольшая сумма. Никаких ручных платежей и напоминаний.</p></div>
+      <div class="step"><div class="step-num">03</div><h3>Коробочка приходит вовремя</h3><p>Ровно в тот момент, когда стоматолог рекомендует менять. С сюрпризом внутри.</p></div>
+      <div class="step"><div class="step-num">04</div><h3>Собираешь коллекцию</h3><p>Каждый сезон — новый цвет упаковки. Весна, лето, осень, зима.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="seasons-section">
+  <div class="seasons-inner">
+    <div class="seasons-title">Четыре сезона — четыре выпуска</div>
+    <div class="seasons-sub">Каждый квартал — новая палитра, новый бонус, новое ощущение.</div>
+    <div class="seasons-grid">
+      <div class="season-card" style="background:linear-gradient(160deg,#2d5a27,#4a8a3f);">
+        <div class="season-card-top"><div class="s-num">ВЫПУСК 01</div><div class="s-name">Весна</div><div class="s-months">март — май</div></div>
+        <div class="season-card-bottom"><div class="bonus-label">Бонус</div><div class="bonus">Ополаскиватель с мятой</div></div>
+      </div>
+      <div class="season-card" style="background:linear-gradient(160deg,#a05e08,#d4921a);">
+        <div class="season-card-top"><div class="s-num">ВЫПУСК 02</div><div class="s-name">Лето</div><div class="s-months">июнь — август</div></div>
+        <div class="season-card-bottom"><div class="bonus-label">Бонус</div><div class="bonus">Таблетки для отбеливания</div></div>
+      </div>
+      <div class="season-card" style="background:linear-gradient(160deg,#6b2d0e,#a04a22);">
+        <div class="season-card-top"><div class="s-num">ВЫПУСК 03</div><div class="s-name">Осень</div><div class="s-months">сентябрь — ноябрь</div></div>
+        <div class="season-card-bottom"><div class="bonus-label">Бонус</div><div class="bonus">Зубная нить вощёная</div></div>
+      </div>
+      <div class="season-card" style="background:linear-gradient(160deg,#1a3a6b,#2e5fa0);">
+        <div class="season-card-top"><div class="s-num">ВЫПУСК 04</div><div class="s-name">Зима</div><div class="s-months">декабрь — февраль</div></div>
+        <div class="season-card-bottom"><div class="bonus-label">Бонус</div><div class="bonus">Угольные таблетки</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing-section">
+  <div class="pricing-inner">
+    <div class="pricing-title">Два тарифа</div>
+    <div class="pricing-sub">Оба включают насадку, доставку и сезонный дизайн упаковки.</div>
+    <div class="plans">
+      <div class="plan">
+        <div class="plan-name">Базовый</div>
+        <div class="plan-price">290<span style="font-size:18px">₽</span></div>
+        <div class="plan-period">в месяц</div>
+        <ul class="plan-features">
+          <li>1 насадка на выбор</li>
+          <li>Сезонная упаковка</li>
+          <li>Доставка по России</li>
+        </ul>
+      </div>
+      <div class="plan featured">
+        <div class="plan-badge">Популярный</div>
+        <div class="plan-name">Премиум</div>
+        <div class="plan-price">490<span style="font-size:18px">₽</span></div>
+        <div class="plan-period">в месяц</div>
+        <ul class="plan-features">
+          <li>2 насадки на выбор</li>
+          <li>Фирменная коробка</li>
+          <li>Бонус каждый сезон</li>
+          <li>Ранний доступ к выпускам</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-title">Будь первым — список предзаписи открыт</div>
+  <div class="cta-sub">Первые 100 подписчиков получат скидку 20% на первый выпуск</div>
+  <div class="cta-form" id="cta-form">
+    <input type="email" id="cta-email" placeholder="твой@email.ru" />
+    <button class="btn-green" onclick="ctaSubmit()">Записаться</button>
+  </div>
+  <div class="success" id="cta-success">
+    <div style="font-size:36px;margin-bottom:8px;">🌿</div>
+    <div style="color:var(--green-dark);font-size:15px;font-weight:500;">Ты в списке! Напишем при запуске.</div>
+  </div>
+  <div class="counter">Уже записались: <strong id="count">47</strong> человек</div>
+</section>
+
+<footer>
+  <div class="footer-logo">BERO</div>
+  <div class="footer-sub">Natural Oral Care · Чистота по расписанию</div>
+</footer>
+
+<script>
+let count = 47;
+function tick() {
+  if (Math.random() < 0.3) { count++; document.getElementById('count').textContent = count; }
+  setTimeout(tick, 3000 + Math.random() * 5000);
+}
+setTimeout(tick, 4000);
+
+async function submitEmail(email) {
+  try {
+    await fetch('https://tally.so/r/QKX1kp', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: 'email=' + encodeURIComponent(email)
+    });
+  } catch(e) {}
+  // Also store locally
+  const emails = JSON.parse(localStorage.getItem('bero_emails') || '[]');
+  emails.push({ email, date: new Date().toISOString() });
+  localStorage.setItem('bero_emails', JSON.stringify(emails));
+}
+
+function heroSubmit() {
+  const email = document.getElementById('hero-email').value;
+  if (!email || !email.includes('@')) {
+    document.getElementById('hero-email').style.outline = '1px solid rgba(255,100,100,0.6)';
+    return;
+  }
+  submitEmail(email);
+  document.getElementById('hero-form').classList.add('hide');
+  document.getElementById('hero-success').classList.add('show');
+  count++; document.getElementById('count').textContent = count;
+}
+function ctaSubmit() {
+  const email = document.getElementById('cta-email').value;
+  if (!email || !email.includes('@')) return;
+  submitEmail(email);
+  document.getElementById('cta-form').classList.add('hide');
+  document.getElementById('cta-success').classList.add('show');
+  count++; document.getElementById('count').textContent = count;
+}
+</script>
+</body>
+</html>
